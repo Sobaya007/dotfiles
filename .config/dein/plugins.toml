@@ -1,0 +1,137 @@
+[[plugins]]
+repo = 'Shougo/dein.vim'
+
+[[plugins]]
+repo = 'Shougo/denite.nvim'
+
+[[plugins]]
+repo = 'Shougo/vimproc'
+build = 'make'
+
+[[plugins]] # ステータスライン
+repo = 'itchyny/lightline.vim'
+hook_add = '''
+    let g:lightline = { 
+    \   'colorscheme': 'wombat'
+    \}
+'''
+[[plugins]] #補間
+repo = 'Shougo/deoplete.nvim'
+on_event = 'InsertCharPre'
+hook_source = '''
+let g:deoplete#enable_at_startup = 1
+let g:deoplete#auto_complete_delay = 0
+let g:deoplete#auto_complete_start_length = 1
+let g:deoplete#enable_camel_case = 0
+let g:deoplete#enable_ignore_case = 0
+let g:deoplete#enable_refresh_always = 0
+let g:deoplete#enable_smart_case = 1
+let g:deoplete#file#enable_buffer_path = 1
+let g:deoplete#max_list = 10000
+inoremap <expr><tab> pumvisible() ? "\<C-n>" :
+\ neosnippet#expandable_or_jumpable() ?
+\    "\<Plug>(neosnippet_expand_or_jump)" : "\<tab>"
+'''
+on_i = 1
+
+#[[plugins]]
+#repo = 'landaire/deoplete-d'
+
+[[plugins]] #スニペット
+repo = 'Shougo/neosnippet'
+
+[[plugins]]
+repo = 'Shougo/neosnippet-snippets'
+
+[[plugins]] #ディレクトリ見るやつ
+repo = 'scrooloose/nerdtree'
+
+[[plugins]]
+repo = 'majutsushi/tagbar'
+
+[[plugins]]
+repo = 'Xuyuanp/nerdtree-git-plugin'
+
+[[plugins]] #Git系
+repo = 'tpope/vim-fugitive'
+
+[[plugins]]
+repo = 'airblade/vim-gitgutter'
+
+[[plugins]]
+repo = 'cohama/agit.vim'
+
+[[plugins]]
+repo = 'rking/ag.vim'
+
+[[plugins]] #プログラム
+repo = 'thinca/vim-quickrun'
+
+[[plugins]]
+repo = 'osyo-manga/shabadou.vim'
+
+[[plugins]]
+repo = 'osyo-manga/vim-watchdogs'
+
+[[plugins]]
+repo = 'ctrlpvim/ctrlp.vim'
+
+[[plugins]]
+repo = 'yegappan/grep'
+
+[[plugins]]
+repo = 'jceb/vim-hier'
+
+[[plugins]]
+repo = 'euclio/vim-markdown-composer'
+hook_post_source = '''
+  if a:info.status != 'unchanged' || a:info.force
+    if has('nvim')
+      let cmd = 'cargo build --release'
+    else
+      let cmd = 'cargo build --release --no-default-features --features json-rpc'
+    endif
+  endif
+  let g:dein#plugin.build = cmd
+'''
+
+# Lang
+
+[[plugins]] # Html5
+repo  = 'othree/html5.vim'
+on_ft = 'html'
+
+[[plugins]] # Toml
+repo  = 'cespare/vim-toml'
+on_ft = 'toml'
+
+[[plugins]] # Markdown
+repo = 'plasticboy/vim-markdown'
+on_ft = ['markdown','mkd']
+
+[[plugins]] #LaTex
+repo = 'lervag/vimtex'
+on_ft = '.tex'
+
+[[plugins]] # Rust
+repo = 'rust-lang/rust.vim'
+on_ft = 'rs'
+
+[[plugins]] # Japanese doc
+repo = 'vim-jp/vimdoc-ja'
+on_ft = 'help'
+hook_add = '''
+    set helplang=ja,en
+'''
+
+[[plugins]] #Java Script
+repo = 'pangloss/vim-javascript'
+on_ft = 'js'
+
+[[plugins]] #Dlang
+repo = 'idanarye/vim-dutyl'
+on_ft = 'd'
+
+# Colors
+[[plugins]]
+repo = 'vim-scripts/summerfruit256.vim'
