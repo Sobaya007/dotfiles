@@ -28,7 +28,7 @@ set statusline=%F%m%r%h%w\ [FORMAT=%{&ff}]\ [TYPE=%Y]\ [ASCII=\%03.3b]\ [POS=%04
 set tabstop=4
 set shiftwidth=4
 set expandtab
-"set clipboard=unnamed,autoselect
+set clipboard+=unnamedplus
 set nofoldenable
 set encoding=utf-8
 set fileencodings=utf-8,iso-2022-jp,cp932,sjis,euc-jp

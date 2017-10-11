@@ -1,2 +1,3 @@
-vmap <Enter> <Plug>(EasyAlign)
-nmap <Leader>a <Plug>(EasyAlign)
+xmap <C-l> :EasyAlign
+nmap <C-l> :EasyAlign
+vmap <C-l> :EasyAlign

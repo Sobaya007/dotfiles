@@ -64,6 +64,9 @@ repo = 'cohama/agit.vim'
 [[plugins]]
 repo = 'rking/ag.vim'
 
+[[plugins]]
+repo = 'junegunn/vim-easy-align'
+
 [[plugins]] #プログラム
 repo = 'thinca/vim-quickrun'
 
