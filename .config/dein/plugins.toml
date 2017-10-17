@@ -37,6 +37,9 @@ on_i = 1
 #[[plugins]]
 #repo = 'landaire/deoplete-d'
 
+[[plugins]]
+repo = 'tyru/open-browser.vim'
+
 [[plugins]] #スニペット
 repo = 'Shougo/neosnippet'
 
@@ -86,14 +89,15 @@ repo = 'yegappan/grep'
 repo = 'jceb/vim-hier'
 
 [[plugins]]
+repo = 'osyo-manga/vim-over'
+
+[[plugins]]
 repo = 'euclio/vim-markdown-composer'
-hook_post_source = '''
-  if a:info.status != 'unchanged' || a:info.force
-    if has('nvim')
-      let cmd = 'cargo build --release'
-    else
-      let cmd = 'cargo build --release --no-default-features --features json-rpc'
-    endif
+hook_post_update = '''
+  if has('nvim')
+    let cmd = 'cargo build --release'
+  else
+    let cmd = 'cargo build --release --no-default-features --features json-rpc'
   endif
   let g:dein#plugin.build = cmd
 '''
@@ -132,9 +136,18 @@ repo = 'pangloss/vim-javascript'
 on_ft = 'js'
 
 [[plugins]] #Dlang
-repo = 'idanarye/vim-dutyl'
+repo = 'Sobaya007/vim-dutyl'
 on_ft = 'd'
 
+[[plugins]]
+repo = 'dlang-community/DCD'
+on_ft = 'd'
+build = 'dub.exe build --build=release --config=client & dub.exe build --build=release --config=server'
+
+[[plugins]]
+repo = 'dlang-community/D-Scanner'
+on_ft = 'd'
+build = 'dub.exe build'
 # Colors
 [[plugins]]
 repo = 'vim-scripts/summerfruit256.vim'

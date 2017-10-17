@@ -70,3 +70,9 @@ endfunction
 if &compatible
     set nocompatible
 endif
+
+function Po()
+    execute '!nohup php -S localhost:8080 &'
+endfunction
+
+command! Poyo call Po()

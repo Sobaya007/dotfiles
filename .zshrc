@@ -12,6 +12,7 @@ PROMPT='
 
 setopt histignorealldups sharehistory
 setopt nonomatch
+unsetopt BG_NICE
 
 bindkey -v
 
@@ -75,6 +76,9 @@ alias pbpaste='xsel --clipboard --output'
 alias sabac='ssh -i "TokyoSaba.pem" ec2-user@ec2-52-199-205-172.ap-northeast-1.compute.amazonaws.com'
 alias sabasftp='sftp -i "TokyoSaba.pem" ec2-user@ec2-52-199-205-172.ap-northeast-1.compute.amazonaws.com'
 alias color='for code in {000..255}; do print -nP -- "%F{$code}$code %f"; [ $((${code} % 16)) -eq 15 ] && echo; done'
+alias chrome='/mnt/c/Program\ Files\ (x86)/Google/Chrome\ Dev/Application/chrome.exe'
+alias dmd='dmd.exe'
+alias rdmd='rdmd.exe'
 alias dub='dub.exe'
 alias cmake='cmake.exe'
 alias ldc='ldc2'
