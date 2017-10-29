@@ -88,3 +88,5 @@ LESSOPEN='| /usr/share/source-highlight/src-hilite-lesspipe.sh %s'
 [[ -z "$TMUX" && ! -z "$PS1" ]] && exec tmux
 export GOPATH=$HOME/go
 export PATH=$PATH:$GOPATH/bin
+
+exec /usr/bin/fish
