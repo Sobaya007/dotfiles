@@ -35,7 +35,11 @@ inoremap <expr><tab> pumvisible() ? "\<C-n>" :
 on_i = 1
 
 #[[plugins]]
-#repo = 'landaire/deoplete-d'
+#repo = 'Sobaya007/deoplete-d'
+#hook_source = '''
+#let g:deoplete#sources#d#dcd_client_binary="~/.cache/dein/repos/github.com/dlang-community/DCD/dcd-client.exe"
+#let g:deoplete#sources#d#dcd_server_binary="~/.cache/dein/repos/github.com/dlang-community/DCD/dcd-server.exe"
+#'''
 
 [[plugins]]
 repo = 'tyru/open-browser.vim'
