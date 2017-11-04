@@ -15,7 +15,13 @@ function fish_prompt
     set_color 00FF40
     echo -n [
     set last_status $status
-    printf '⭠%s' (__fish_git_prompt)
+    switch (uname)
+    case Darwin
+        printf '\ue0a0'
+    case '*'
+        printf '⭠' 
+    end
+    printf '%s' (__fish_git_prompt)
     echo -n ']'
 
     echo

@@ -32,9 +32,6 @@ alias dein='cd ~/.vimfiles/dein/dein.vim/repos/github.com/'
 alias vim='nvim'
 alias vi='nvim'
 alias v='nvim'
-alias ls='ls --color=auto'
-alias la='ls -a --color=auto'
-alias ll='ls -la --color=auto'
 alias grep='grep --color'
 alias so='source'
 alias ga='git add'
@@ -60,6 +57,17 @@ alias rdmd='rdmd.exe'
 alias dub='dub.exe'
 alias cmake='cmake.exe'
 alias ldc='ldc2'
+
+switch (uname)
+case Darwin
+    alias ls='ls -G'
+    alias la='ls -aG'
+    alias ll='ls -lG'
+case '*'
+    alias ls='ls --color=auto'
+    alias la='ls -a --color=auto'
+    alias ll='ls -la --color=auto'
+end
 #set -x DISPLAY=localhost:0.0
 #LESS=' -R '
 #LESSOPEN='| /usr/share/source-highlight/src-hilite-lesspipe.sh %s'
@@ -67,3 +75,5 @@ alias ldc='ldc2'
 set -x GOPATH $HOME/go
 #set -x PATH $PATH $GOPATH/bin
 set -x BROWSER '/mnt/c/Program Files (x86)/Google/Chrome Dev/Application/chrome.exe'
+
+set -x VIM '/usr/local/Cellar/neovim/0.2.0_1/share/nvim'
