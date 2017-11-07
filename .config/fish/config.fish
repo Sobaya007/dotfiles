@@ -63,10 +63,12 @@ case Darwin
     alias ls='ls -G'
     alias la='ls -aG'
     alias ll='ls -lG'
+    set -x VIM '/usr/local/Cellar/neovim/0.2.0_1/share/nvim'
 case '*'
     alias ls='ls --color=auto'
     alias la='ls -a --color=auto'
     alias ll='ls -la --color=auto'
+    set -x BROWSER '/mnt/c/Program Files (x86)/Google/Chrome Dev/Application/chrome.exe'
 end
 #set -x DISPLAY=localhost:0.0
 #LESS=' -R '
@@ -74,6 +76,3 @@ end
 #
 set -x GOPATH $HOME/go
 #set -x PATH $PATH $GOPATH/bin
-set -x BROWSER '/mnt/c/Program Files (x86)/Google/Chrome Dev/Application/chrome.exe'
-
-set -x VIM '/usr/local/Cellar/neovim/0.2.0_1/share/nvim'
