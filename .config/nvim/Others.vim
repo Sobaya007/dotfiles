@@ -4,12 +4,14 @@ noremap <C-h> <C-w>h
 noremap <C-j> <C-w>j
 noremap <C-k> <C-w>k
 noremap <C-l> <C-w>l
-nnoremap dd "*dd
-vnoremap d "*d
-nnoremap yy "*yy
-vnoremap y "*y
-nnoremap p "*p
-vnoremap p "*p
+if has('win32')
+    nnoremap dd "*dd
+    vnoremap d "*d
+    nnoremap yy "*yy
+    vnoremap y "*y
+    nnoremap p "*p
+    vnoremap p "*p
+endif
 noremap t :vsplit<CR>:terminal<CR>
 nnoremap == gg=G
 nnoremap <C-q> :call RunTerminal()<CR>

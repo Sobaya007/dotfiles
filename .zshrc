@@ -89,4 +89,4 @@ LESSOPEN='| /usr/share/source-highlight/src-hilite-lesspipe.sh %s'
 export GOPATH=$HOME/go
 export PATH=$PATH:$GOPATH/bin
 
-exec /usr/bin/fish
+exec fish

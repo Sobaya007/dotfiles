@@ -1,4 +1,5 @@
 nnoremap <silent><C-d> :TagbarToggle<CR>
+let g:tagbar_foldlevel=1
 let g:tagbar_type_d = {
             \ 'ctagstype' : 'd',
             \ 'kinds'     : [

@@ -32,7 +32,7 @@ if dein#load_state(s:dein_cache_dir)
 
     let s:toml_dir = g:config_home . '/dein'
 
-    call dein#load_toml(s:toml_dir . '/plugins.toml', {'lazy': 0})
+    call dein#load_toml(s:toml_dir . '/plugins.toml', {'lazy': 1})
 
     call dein#end()
     call dein#save_state()
@@ -45,8 +45,8 @@ endif
 set runtimepath^=~/.vimfiles
 
 filetype plugin indent on
-runtime! userautoload/*.vim
+
+source ~/.config/nvim/Others.vim
 
 colorscheme molokai
-set t_Co=256
 " }}}

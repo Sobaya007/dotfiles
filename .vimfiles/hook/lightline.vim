@@ -10,7 +10,6 @@ if has('mac')
           \   'readonly': 'MyReadonly',
           \   'fugitive': 'MyFugitive',
           \   'gitgutter': 'MyGitGutter',
-          \   'filename': 'MyFilename',
           \   'fileformat': 'MyFileformat',
           \   'filetype': 'MyFiletype',
           \   'fileencoding': 'MyFileencoding',

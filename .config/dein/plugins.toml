@@ -2,47 +2,22 @@
 repo = 'Shougo/dein.vim'
 
 [[plugins]]
-repo = 'Shougo/denite.nvim'
-
-[[plugins]]
 repo = 'Shougo/vimproc'
 build = 'make'
 
 [[plugins]] # ステータスライン
 repo = 'itchyny/lightline.vim'
-hook_add = '''
-    let g:lightline = { 
-    \   'colorscheme': 'wombat'
-    \}
-'''
+hook_add = 'source ~/.vimfiles/hook/lightline.vim'
+
 [[plugins]] #補間
 repo = 'Shougo/deoplete.nvim'
 on_event = 'InsertCharPre'
-hook_source = '''
-let g:deoplete#enable_at_startup = 1
-let g:deoplete#auto_complete_delay = 0
-let g:deoplete#auto_complete_start_length = 1
-let g:deoplete#enable_camel_case = 0
-let g:deoplete#enable_ignore_case = 0
-let g:deoplete#enable_refresh_always = 0
-let g:deoplete#enable_smart_case = 1
-let g:deoplete#file#enable_buffer_path = 1
-let g:deoplete#max_list = 10000
-inoremap <expr><tab> pumvisible() ? "\<C-n>" :
-\ neosnippet#expandable_or_jumpable() ?
-\    "\<Plug>(neosnippet_expand_or_jump)" : "\<tab>"
-'''
+hook_add = 'source ~/.vimfiles/hook/deoplete.vim'
 on_i = 1
 
-#[[plugins]]
-#repo = 'Sobaya007/deoplete-d'
-#hook_source = '''
-#let g:deoplete#sources#d#dcd_client_binary="~/.cache/dein/repos/github.com/dlang-community/DCD/dcd-client.exe"
-#let g:deoplete#sources#d#dcd_server_binary="~/.cache/dein/repos/github.com/dlang-community/DCD/dcd-server.exe"
-#'''
-
 [[plugins]]
-repo = 'tyru/open-browser.vim'
+repo = 'Sobaya007/deoplete-d'
+on_ft = 'd'
 
 [[plugins]] #スニペット
 repo = 'Shougo/neosnippet'
@@ -52,15 +27,18 @@ repo = 'Shougo/neosnippet-snippets'
 
 [[plugins]] #ディレクトリ見るやつ
 repo = 'scrooloose/nerdtree'
+hook_add = 'source ~/.vimfiles/hook/NerdTree.vim'
 
 [[plugins]]
 repo = 'majutsushi/tagbar'
+hook_add = 'source ~/.vimfiles/hook/TagBar.vim'
 
 [[plugins]]
 repo = 'Xuyuanp/nerdtree-git-plugin'
 
 [[plugins]] #Git系
 repo = 'tpope/vim-fugitive'
+hook_add = 'source ~/.vimfiles/hook/vim-fugitive.vim'
 
 [[plugins]]
 repo = 'airblade/vim-gitgutter'
@@ -71,9 +49,6 @@ repo = 'cohama/agit.vim'
 [[plugins]]
 repo = 'rking/ag.vim'
 
-[[plugins]]
-repo = 'junegunn/vim-easy-align'
-
 [[plugins]] #プログラム
 repo = 'thinca/vim-quickrun'
 
@@ -81,22 +56,12 @@ repo = 'thinca/vim-quickrun'
 repo = 'osyo-manga/shabadou.vim'
 
 [[plugins]]
-repo = 'osyo-manga/vim-watchdogs'
-
-[[plugins]]
 repo = 'ctrlpvim/ctrlp.vim'
-
-[[plugins]]
-repo = 'yegappan/grep'
-
-[[plugins]]
-repo = 'jceb/vim-hier'
-
-[[plugins]]
-repo = 'osyo-manga/vim-over'
+hook_add = 'source ~/.vimfiles/hook/ctrlp.vim'
 
 [[plugins]]
 repo = 'euclio/vim-markdown-composer'
+hook_add = 'source ~/.vimfiles/hook/vim-markdown-composer.vim'
 hook_post_update = '''
   if has('nvim')
     let cmd = 'cargo build --release'
@@ -123,35 +88,36 @@ on_ft = ['markdown','mkd']
 [[plugins]] #LaTex
 repo = 'lervag/vimtex'
 on_ft = '.tex'
+hook_add = 'source ~/.vimfiles/hook/Vim-Latex.vim'
 
-[[plugins]] # Rust
+[[plugins]] # Rust 
 repo = 'rust-lang/rust.vim'
 on_ft = 'rs'
 
 [[plugins]] # Japanese doc
 repo = 'vim-jp/vimdoc-ja'
 on_ft = 'help'
-hook_add = '''
-    set helplang=ja,en
-'''
+hook_add = 'set helplang=ja,en'
 
 [[plugins]] #Java Script
 repo = 'pangloss/vim-javascript'
 on_ft = 'js'
 
-[[plugins]] #Dlang
-repo = 'Sobaya007/vim-dutyl'
-on_ft = 'd'
-
 [[plugins]]
 repo = 'dlang-community/DCD'
 on_ft = 'd'
-build = 'dub.exe build --build=release --config=client & dub.exe build --build=release --config=server'
+hook_post_update = '''
+let cmd = 'dub build --build=release --config=client & dub build --build=release --config=server & mv ./dcd-client /usr/local/bin & mv ./dcd-server /usr/local/bin'
+let g:dein#plugin.build = cmd
+'''
 
 [[plugins]]
 repo = 'dlang-community/D-Scanner'
 on_ft = 'd'
-build = 'dub.exe build'
-# Colors
+hook_post_update = '''
+let cmd = 'dub build & mv ./dscanner /usr/local/bin
+'''
+
 [[plugins]]
-repo = 'vim-scripts/summerfruit256.vim'
+repo = 'tomasr/molokai'
+hook_add = 'set t_Co=256'

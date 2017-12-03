@@ -46,16 +46,9 @@ alias gstash='git stash'
 alias glist='git stash list'
 alias gpop='git stash pop'
 alias gcom='git commit'
-alias pbcopy='xsel --clipboard --input'
-alias pbpaste='xsel --clipboard --output'
 alias sabac='ssh -i "TokyoSaba.pem" ec2-user@ec2-52-199-205-172.ap-northeast-1.compute.amazonaws.com'
 alias sabasftp='sftp -i "TokyoSaba.pem" ec2-user@ec2-52-199-205-172.ap-northeast-1.compute.amazonaws.com'
 #alias color='for code in {000..255}; do print -nP -- "%F{$code}$code %f"; [ $((${code} % 16)) -eq 15 ] && echo; done'
-alias chrome='/mnt/c/Program Files (x86)/Google/Chrome Dev/Application/chrome.exe'
-alias dmd='dmd.exe'
-alias rdmd='rdmd.exe'
-alias dub='dub.exe'
-alias cmake='cmake.exe'
 alias ldc='ldc2'
 
 switch (uname)
@@ -63,10 +56,18 @@ case Darwin
     alias ls='ls -G'
     alias la='ls -aG'
     alias ll='ls -lG'
+    set -x PATH $PATH $HOME/dmd2/osx/bin
 case '*'
     alias ls='ls --color=auto'
     alias la='ls -a --color=auto'
     alias ll='ls -la --color=auto'
+    alias chrome='/mnt/c/Program Files (x86)/Google/Chrome Dev/Application/chrome.exe'
+    alias dmd='dmd.exe'
+    alias rdmd='rdmd.exe'
+    alias dub='dub.exe'
+    alias cmake='cmake.exe'
+    alias pbcopy='xsel --clipboard --input'
+    alias pbpaste='xsel --clipboard --output'
 end
 #set -x DISPLAY=localhost:0.0
 #LESS=' -R '
@@ -77,3 +78,4 @@ set -x GOPATH $HOME/go
 set -x BROWSER '/mnt/c/Program Files (x86)/Google/Chrome Dev/Application/chrome.exe'
 
 set -x VIM '/usr/local/Cellar/neovim/0.2.0_1/share/nvim'
+source $HOME/.cargo/env
