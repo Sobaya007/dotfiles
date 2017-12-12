@@ -1,0 +1,110 @@
+[[plugins]] # 補間
+repo = 'Shougo/deoplete.nvim'
+on_event = 'InsertCharPre'
+hook_add = 'source ~/.vimfiles/hook/deoplete.vim'
+on_event = 'InsertEnter'
+
+[[plugins]] # D言語拡張
+repo = 'Sobaya007/deoplete-d'
+on_ft = 'd'
+on_event = 'InsertEnter'
+
+[[plugins]] # Dのやつ
+repo = 'Sobaya007/vim-dutyl'
+on_ft = 'd'
+depends = ['vim-quickrun']
+hook_source = '''
+  autocmd BufWritePost *.d DUsyntaxCheck %
+  nnoremap <buffer> <C-]> :DUjump<CR>
+  let g:dutyl_dontHandleFormat=1
+  let g:dutyl_dontHandleIndent=1
+'''
+hook_post_source = '''
+  if !empty(dutyl#projectRoot())
+    let g:quickrun_config["watchdogs_checker/dmd"] = {
+                \ "command" : "dub",
+                \ "exec"    : "%c build %o",
+                \ "cmdopt": "--build=syntax",
+                \ "errorformat": '%f(%l\,%c):\ %trror: %m, %-G%.%#',
+                \ "hook/output" : "echo data",
+                \ 'outputter' : 'error',
+                \ 'outputter/error/error'   : 'quickfix',
+                \ "outputter/buffer/split" : ":botright 8sp",
+                \ 'outputter/buffer/close_on_empty' : 1,
+                \ "hook/echo/enable" : 1,
+                \ "hook/echo/output_success": "> No Errors Found.",
+                \ "runner" : "vimproc",
+                \ "runner/vimproc/updatetime" : 10
+                \}
+    let g:quickrun_config["d"] = {
+                \ "command" : "dub",
+                \ "exec"    : "%c %o",
+                \ 'outputter' : 'buffer',
+                \ "runner" : "vimproc",
+                \ "runner/vimproc/updatetime" : 10
+                \}
+  endif
+'''
+
+[[plugins]] # スニペット
+repo = 'Shougo/neosnippet'
+hook_source = '''
+  imap <C-k> <Plug>(neosnippet_expand_or_jump)
+  smap <C-k> <Plug>(neosnippet_expand_or_jump)
+  xmap <C-k> <Plug>(neosnippet_expand_target)
+  if has('conceal')
+    set conceallevel=2 concealcursor=niv
+  endif
+'''
+on_ft = ['snippet']
+on_event = 'InsertEnter'
+depends = ['neosnippet-snippets']
+
+[[plugins]] # スニペットの内容
+repo = 'Shougo/neosnippet-snippets'
+on_event = 'InsertEnter'
+
+# Lang
+
+[[plugins]] # Html5
+repo  = 'othree/html5.vim'
+on_ft = 'html'
+
+[[plugins]] # Toml
+repo  = 'cespare/vim-toml'
+on_ft = 'toml'
+
+[[plugins]] # Markdown
+repo = 'plasticboy/vim-markdown'
+on_ft = ['markdown','mkd']
+
+[[plugins]] #LaTex
+repo = 'lervag/vimtex'
+on_ft = '.tex'
+hook_add = 'source ~/.vimfiles/hook/Vim-Latex.vim'
+
+[[plugins]] # Rust 
+repo = 'rust-lang/rust.vim'
+on_ft = 'rust'
+
+[[plugins]] # Japanese doc
+repo = 'vim-jp/vimdoc-ja'
+on_ft = 'help'
+hook_add = 'set helplang=ja,en'
+
+[[plugins]] #Java Script
+repo = 'pangloss/vim-javascript'
+on_ft = 'js'
+
+[[plugins]] # Markdownがブラウザでプレビューできる
+repo = 'euclio/vim-markdown-composer'
+on_ft = 'markdown'
+hook_add = 'source ~/.vimfiles/hook/vim-markdown-composer.vim'
+hook_post_update = '''
+  if has('nvim')
+    let cmd = 'cargo build --release'
+  else
+    let cmd = 'cargo build --release --no-default-features --features json-rpc'
+  endif
+  let g:dein#plugin.build = cmd
+'''

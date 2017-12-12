@@ -1,5 +1,5 @@
-noremap j gj
-noremap k gk
+noremap <silent> j gj
+noremap <silent> k gk
 noremap <C-h> <C-w>h
 noremap <C-j> <C-w>j
 noremap <C-k> <C-w>k
@@ -54,8 +54,6 @@ autocmd BufRead,BufNewFile *.js set tabstop=4 shiftwidth=4
 "autocmd BufRead,BufNewFile,BufWrite *.tex execute '!latexmk %'
 
 nnoremap <silent><C-z> :call RunTerminal()<CR>
-
-let g:markdown_composer_browser='chrome.exe'
 
 function RunTerminal()
  let commands = {

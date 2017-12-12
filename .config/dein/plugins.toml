@@ -1,123 +1,63 @@
-[[plugins]]
+[[plugins]] # プラグインマネージャ
 repo = 'Shougo/dein.vim'
+hook_add = '''
+    autocmd VimEnter * call dein#call_hook('post_source')
+'''
 
-[[plugins]]
+[[plugins]] # 非同期処理
 repo = 'Shougo/vimproc'
-build = 'make'
+hook_post_update = '''
+    let cmd = 'make'
+    let g:dein#plugin.build = cmd
+'''
 
 [[plugins]] # ステータスライン
 repo = 'itchyny/lightline.vim'
 hook_add = 'source ~/.vimfiles/hook/lightline.vim'
 
-[[plugins]] #補間
-repo = 'Shougo/deoplete.nvim'
-on_event = 'InsertCharPre'
-hook_add = 'source ~/.vimfiles/hook/deoplete.vim'
-on_i = 1
-
-[[plugins]]
-repo = 'Sobaya007/deoplete-d'
-on_ft = 'd'
-
-[[plugins]] #スニペット
-repo = 'Shougo/neosnippet'
-
-[[plugins]]
-repo = 'Shougo/neosnippet-snippets'
-
-[[plugins]] #ディレクトリ見るやつ
+[[plugins]] # ファイルツリー
 repo = 'scrooloose/nerdtree'
-hook_add = 'source ~/.vimfiles/hook/NerdTree.vim'
+hook_add = 'nnoremap <silent><C-e> :NERDTreeToggle<CR>'
 
-[[plugins]]
+[[plugins]] # ファイルツリーにGit情報をのせる
+repo = 'Xuyuanp/nerdtree-git-plugin'
+
+[[plugins]] # 関数定義とか見れる
 repo = 'majutsushi/tagbar'
 hook_add = 'source ~/.vimfiles/hook/TagBar.vim'
 
-[[plugins]]
-repo = 'Xuyuanp/nerdtree-git-plugin'
-
-[[plugins]] #Git系
+[[plugins]] # Git操作
 repo = 'tpope/vim-fugitive'
-hook_add = 'source ~/.vimfiles/hook/vim-fugitive.vim'
 
-[[plugins]]
+[[plugins]] # ファイルの左側にGit情報をのせる
 repo = 'airblade/vim-gitgutter'
 
-[[plugins]]
+[[plugins]] # コミットログを出す
 repo = 'cohama/agit.vim'
 
-[[plugins]]
+[[plugins]] # 検索
 repo = 'rking/ag.vim'
+hook_add = 'nnoremap ? :LAg '
 
-[[plugins]] #プログラム
+[[plugins]] # 適当に実行
 repo = 'thinca/vim-quickrun'
+hook_add = 'nnoremap <S-r> :QuickRun<CR>'
 
-[[plugins]]
+[[plugins]] # quickrunのhookがいっぱいある
 repo = 'osyo-manga/shabadou.vim'
 
-[[plugins]]
+[[plugins]] # quickfixのエラー箇所をハイライト
+repo = 'jceb/vim-hier'
+
+[[plugins]] # 非同期シンタックスチェック
+repo = 'osyo-manga/vim-watchdogs'
+depends = ['vimproc', 'vim-quickrun', 'shabadou.vim', 'vim-hier']
+hook_add = 'source ~/.vimfiles/hook/Watchdogs.vim'
+
+[[plugins]] # ファイル名検索ジャンプ
 repo = 'ctrlpvim/ctrlp.vim'
 hook_add = 'source ~/.vimfiles/hook/ctrlp.vim'
 
-[[plugins]]
-repo = 'euclio/vim-markdown-composer'
-hook_add = 'source ~/.vimfiles/hook/vim-markdown-composer.vim'
-hook_post_update = '''
-  if has('nvim')
-    let cmd = 'cargo build --release'
-  else
-    let cmd = 'cargo build --release --no-default-features --features json-rpc'
-  endif
-  let g:dein#plugin.build = cmd
-'''
-
-# Lang
-
-[[plugins]] # Html5
-repo  = 'othree/html5.vim'
-on_ft = 'html'
-
-[[plugins]] # Toml
-repo  = 'cespare/vim-toml'
-on_ft = 'toml'
-
-[[plugins]] # Markdown
-repo = 'plasticboy/vim-markdown'
-on_ft = ['markdown','mkd']
-
-[[plugins]] #LaTex
-repo = 'lervag/vimtex'
-on_ft = '.tex'
-hook_add = 'source ~/.vimfiles/hook/Vim-Latex.vim'
-
-[[plugins]] # Rust 
-repo = 'rust-lang/rust.vim'
-on_ft = 'rs'
-
-[[plugins]] # Japanese doc
-repo = 'vim-jp/vimdoc-ja'
-on_ft = 'help'
-hook_add = 'set helplang=ja,en'
-
-[[plugins]] #Java Script
-repo = 'pangloss/vim-javascript'
-on_ft = 'js'
-
-[[plugins]]
-repo = 'dlang-community/DCD'
-on_ft = 'd'
-hook_post_update = '''
-let cmd = 'dub build --build=release --config=client & dub build --build=release --config=server & mv ./dcd-client /usr/local/bin & mv ./dcd-server /usr/local/bin'
-let g:dein#plugin.build = cmd
-'''
-
-[[plugins]]
-repo = 'dlang-community/D-Scanner'
-on_ft = 'd'
-hook_post_update = '''
-let cmd = 'dub build & mv ./dscanner /usr/local/bin
-'''
-
-[[plugins]]
+[[plugins]] # カラースキーマ
 repo = 'tomasr/molokai'
 hook_add = 'set t_Co=256'

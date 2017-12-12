@@ -13,5 +13,3 @@ inoremap <expr><tab> pumvisible() ? "\<C-n>" :
 \    "\<Plug>(neosnippet_expand_or_jump)" : "\<tab>"
 
 let g:deoplete#sources#d#dcd_server_autostart = 1
-let g:deoplete#sources#d#dcd_client_binary=g:cache_home . '/dein/repos/github.com/dlang-community/DCD/dcd-client'
-let g:deoplete#sources#d#dcd_server_binary=g:cache_home . '/dein/repos/github.com/dlang-community/DCD/dcd-server'
