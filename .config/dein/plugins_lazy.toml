@@ -8,41 +8,23 @@ on_event = 'InsertEnter'
 repo = 'Sobaya007/deoplete-d'
 on_ft = 'd'
 on_event = 'InsertEnter'
+depends = ['deoplete.nvim']
+hook_add = '''
+let g:deoplete#sources#d#dcd_server_autostart=1
+let g:deoplete#sources#d#dub_import=1
+'''
 
 [[plugins]] # Dのやつ
 repo = 'Sobaya007/vim-dutyl'
 on_ft = 'd'
-depends = ['vim-quickrun']
 hook_source = '''
-  autocmd BufWritePost *.d DUsyntaxCheck %
-  nnoremap <buffer> <C-]> :DUjump<CR>
+  nnoremap <C-]> :DUjump<CR>
   let g:dutyl_dontHandleFormat=1
   let g:dutyl_dontHandleIndent=1
 '''
 hook_post_source = '''
   if !empty(dutyl#projectRoot())
-    let g:quickrun_config["watchdogs_checker/dmd"] = {
-                \ "command" : "dub",
-                \ "exec"    : "%c build %o",
-                \ "cmdopt": "--build=syntax",
-                \ "errorformat": '%f(%l\,%c):\ %trror: %m, %-G%.%#',
-                \ "hook/output" : "echo data",
-                \ 'outputter' : 'error',
-                \ 'outputter/error/error'   : 'quickfix',
-                \ "outputter/buffer/split" : ":botright 8sp",
-                \ 'outputter/buffer/close_on_empty' : 1,
-                \ "hook/echo/enable" : 1,
-                \ "hook/echo/output_success": "> No Errors Found.",
-                \ "runner" : "vimproc",
-                \ "runner/vimproc/updatetime" : 10
-                \}
-    let g:quickrun_config["d"] = {
-                \ "command" : "dub",
-                \ "exec"    : "%c %o",
-                \ 'outputter' : 'buffer',
-                \ "runner" : "vimproc",
-                \ "runner/vimproc/updatetime" : 10
-                \}
+    let g:quickrun_cmd = 'dub'
   endif
 '''
 
@@ -65,6 +47,10 @@ repo = 'Shougo/neosnippet-snippets'
 on_event = 'InsertEnter'
 
 # Lang
+
+[[plugins]] #GLSL
+repo = 'tikhomirov/vim-glsl'
+on_ft = 'glsl'
 
 [[plugins]] # Html5
 repo  = 'othree/html5.vim'
@@ -93,7 +79,7 @@ on_ft = 'help'
 hook_add = 'set helplang=ja,en'
 
 [[plugins]] #Java Script
-repo = 'pangloss/vim-javascript'
+repo = 'othree/yajs.vim'
 on_ft = 'js'
 
 [[plugins]] # Markdownがブラウザでプレビューできる

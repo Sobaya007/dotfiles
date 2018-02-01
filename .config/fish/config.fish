@@ -79,3 +79,19 @@ set -x GOPATH $HOME/go
 #set -x PATH $PATH $GOPATH/bin
 
 source $HOME/.cargo/env
+
+# start tmux
+if status --is-interactive
+    tmux new-session
+#    if tmux ls > /dev/null
+#        set sessions (tmux ls) "Create New Session:"
+#        set result (string join \n $sessions | fzf | cut -d: -f1)
+#        if test $result = "Create New Session"
+#            tmux new-session
+#        else if test -n $result
+#            tmux attach-session -t $result
+#        end
+#    else
+#        tmux new-session; and exit
+#    end
+end 

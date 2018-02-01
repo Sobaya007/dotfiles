@@ -4,14 +4,12 @@ noremap <C-h> <C-w>h
 noremap <C-j> <C-w>j
 noremap <C-k> <C-w>k
 noremap <C-l> <C-w>l
-if has('win32')
-    nnoremap dd "*dd
-    vnoremap d "*d
-    nnoremap yy "*yy
-    vnoremap y "*y
-    nnoremap p "*p
-    vnoremap p "*p
-endif
+nnoremap dd "*dd
+vnoremap d "*d
+nnoremap yy "*yy
+vnoremap y "*y
+nnoremap p "*p
+vnoremap p "*p
 noremap t :vsplit<CR>:terminal<CR>
 nnoremap == gg=G
 nnoremap <C-q> :call RunTerminal()<CR>
@@ -48,31 +46,94 @@ let g:vim_json_syntax_conceal=0
 let g:ctrlp_custom_ignore = 'node_modules/'
 au FileType tex setlocal nocursorline
 au FileType tex :NoMatchParen
-autocmd BufRead,BufNewFile *.vert set filetype=c
-autocmd BufRead,BufNewFile *.frag set filetype=c
+"autocmd BufRead,BufNewFile *.vert set filetype=c
+"autocmd BufRead,BufNewFile *.frag set filetype=c
 autocmd BufRead,BufNewFile *.js set tabstop=4 shiftwidth=4
 "autocmd BufRead,BufNewFile,BufWrite *.tex execute '!latexmk %'
 
-nnoremap <silent><C-z> :call RunTerminal()<CR>
+augroup QfAutoCommands
+  autocmd!
 
-function RunTerminal()
- let commands = {
-       \ "cpp" : "g++ % && ./a.out",
-       \ "c" : "gcc % && ./a.out",
-       \ "python" : "python3 %",
-       \ "rust": "cargo run",
-       \ "d": "dub.exe"
-       \}
- :vsplit
- :execute ":terminal " . commands[&filetype]
+  autocmd WinEnter * if (winnr('$') == 1) && (getbufvar(winbufnr(0), '&buftype')) == 'quickfix' | quit | endif
+augroup END
+
+autocmd BufRead,BufNewFile * call SetQuickRunCommand()
+autocmd BufRead,BufNewFile *.vert, *.frag set ft=glsl
+
+function! s:is_number(str)
+    return (type(a:str) == type(0)) || (a:str =~ '^\d\+$')
 endfunction
+
+
+function! s:winnrlist(...)
+    return a:0
+\       ? range(1, tabpagewinnr(a:1, "$"))
+\       : range(1, tabpagewinnr(tabpagenr(), "$"))
+endfunction
+
+
+function! s:winlist(...)
+    let tabnr = a:0 == 0 ? tabpagenr() : a:1
+    return map(s:winnrlist(tabnr), '{
+\       "winnr" : v:val,
+\       "name"  : gettabwinvar(tabnr, v:val, "name")
+\   }')
+endfunction
+
+
+function! s:winnr(...)
+    return a:0 == 0    ? winnr()
+\        : a:1 ==# "$" ? winnr("$")
+\        : a:1 ==# "#" ? winnr("#")
+\        : !s:is_number(a:1) ? (filter(s:winlist(), 'v:val.name ==# a:1') + [{'winnr' : '-1'}])[0].winnr
+\        : a:1
+endfunction
+
+function! s:winname(...)
+    return a:0 == 0    ? s:winname(winnr())
+\        : a:1 ==# "$" ? s:winname(winnr("$"))
+\        : a:1 ==# "#" ? s:winname(winnr("#"))
+\        : !s:is_number(a:1) ? (filter(s:winlist(), 'v:val.name ==# a:1') + [{'name' : ''}])[0].name
+\        : (filter(s:winlist(), 'v:val.winnr ==# a:1') + [{'name' : ''}])[0].name
+endfunction
+
+
+function! s:split(cmd, name)
+    let winnr = s:winnr(a:name)
+    if winnr == -1
+        silent execute a:cmd
+        let w:name = a:name
+    else
+        silent execute winnr . "wincmd w"
+    endif
+endfunction
+
+command! -count=0 -nargs=1 VSplit call s:split("vsplit", <q-args>) | if <count> | silent execute <count> | endif
+
+function SetQuickRunCommand()
+  let l:file = expand('%')
+  if &filetype == 'c' || &filetype == 'cpp'
+      let g:quickrun_cmd = 'gcc ' . l:file . '; ./a.out'
+  elseif &filetype == 'd'
+      if !empty(dutyl#projectRoot())
+          let g:quickrun_cmd = 'dub'
+      else
+          let g:quickrun_cmd = 'rdmd ' . l:file
+      endif
+  end
+endfunction
+
+function QuickRun()
+  if !exists("g:quickrun_cmd")
+    echo 'Command Not Found.'
+    return
+  endif
+  :VSplit QuickRun
+  exec ":terminal " . g:quickrun_cmd
+endfunction
+
+nnoremap <S-r> :call QuickRun()<CR>
 
 if &compatible
     set nocompatible
 endif
-
-function Po()
-    execute '!nohup php -S localhost:8080 &'
-endfunction
-
-command! Poyo call Po()

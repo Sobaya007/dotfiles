@@ -39,9 +39,9 @@ repo = 'cohama/agit.vim'
 repo = 'rking/ag.vim'
 hook_add = 'nnoremap ? :LAg '
 
-[[plugins]] # 適当に実行
-repo = 'thinca/vim-quickrun'
-hook_add = 'nnoremap <S-r> :QuickRun<CR>'
+#[[plugins]] # 適当に実行
+#repo = 'thinca/vim-quickrun'
+#hook_add = 'nnoremap <S-r> :QuickRun<CR>'
 
 [[plugins]] # quickrunのhookがいっぱいある
 repo = 'osyo-manga/shabadou.vim'
@@ -49,10 +49,13 @@ repo = 'osyo-manga/shabadou.vim'
 [[plugins]] # quickfixのエラー箇所をハイライト
 repo = 'jceb/vim-hier'
 
-[[plugins]] # 非同期シンタックスチェック
-repo = 'osyo-manga/vim-watchdogs'
-depends = ['vimproc', 'vim-quickrun', 'shabadou.vim', 'vim-hier']
-hook_add = 'source ~/.vimfiles/hook/Watchdogs.vim'
+#[[plugins]] # 非同期シンタックスチェック
+#repo = 'osyo-manga/vim-watchdogs'
+#depends = ['vimproc', 'vim-quickrun', 'shabadou.vim', 'vim-hier']
+#hook_add = 'source ~/.vimfiles/hook/Watchdogs.vim'
+
+[[plugins]]
+repo = 'w0rp/ale'
 
 [[plugins]] # ファイル名検索ジャンプ
 repo = 'ctrlpvim/ctrlp.vim'

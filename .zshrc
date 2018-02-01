@@ -85,7 +85,6 @@ alias ldc='ldc2'
 export DISPLAY=localhost:0.0
 LESS=' -R '
 LESSOPEN='| /usr/share/source-highlight/src-hilite-lesspipe.sh %s'
-[[ -z "$TMUX" && ! -z "$PS1" ]] && exec tmux a
 export GOPATH=$HOME/go
 export PATH=$PATH:$GOPATH/bin
 
