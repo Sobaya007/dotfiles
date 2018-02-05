@@ -24,7 +24,7 @@ repo = 'Xuyuanp/nerdtree-git-plugin'
 
 [[plugins]] # 関数定義とか見れる
 repo = 'majutsushi/tagbar'
-hook_add = 'source ~/.vimfiles/hook/TagBar.vim'
+hook_add = 'source ~/.vimfiles/hook/tagbar.vim'
 
 [[plugins]] # Git操作
 repo = 'tpope/vim-fugitive'
