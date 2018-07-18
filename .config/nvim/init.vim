@@ -49,5 +49,5 @@ filetype plugin indent on
 
 source ~/.config/nvim/Others.vim
 
-colorscheme molokai
+colorscheme antares
 " }}}

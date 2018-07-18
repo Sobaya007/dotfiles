@@ -60,28 +60,14 @@ case '*'
     alias ls='ls --color=auto'
     alias la='ls -a --color=auto'
     alias ll='ls -la --color=auto'
+    set -x PATH $PATH /opt/cuda/bin
 end
-#set -x DISPLAY=localhost:0.0
-#LESS=' -R '
-#LESSOPEN='| /usr/share/source-highlight/src-hilite-lesspipe.sh %s'
-#
 set -x GOPATH $HOME/go
-#set -x PATH $PATH $GOPATH/bin
+set -x NODE_PATH (npm root -g)
 
-source $HOME/.cargo/env
+#source $HOME/.cargo/env
 
 # start tmux
 if status --is-interactive
     tmux new-session
-#    if tmux ls > /dev/null
-#        set sessions (tmux ls) "Create New Session:"
-#        set result (string join \n $sessions | fzf | cut -d: -f1)
-#        if test $result = "Create New Session"
-#            tmux new-session
-#        else if test -n $result
-#            tmux attach-session -t $result
-#        end
-#    else
-#        tmux new-session; and exit
-#    end
 end 

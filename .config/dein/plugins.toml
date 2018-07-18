@@ -46,16 +46,26 @@ hook_add = 'nnoremap ? :LAg '
 [[plugins]] # quickrunのhookがいっぱいある
 repo = 'osyo-manga/shabadou.vim'
 
-[[plugins]] # quickfixのエラー箇所をハイライト
-repo = 'jceb/vim-hier'
+#[[plugins]] # quickfixのエラー箇所をハイライト
+#repo = 'jceb/vim-hier'
 
 #[[plugins]] # 非同期シンタックスチェック
 #repo = 'osyo-manga/vim-watchdogs'
 #depends = ['vimproc', 'vim-quickrun', 'shabadou.vim', 'vim-hier']
 #hook_add = 'source ~/.vimfiles/hook/Watchdogs.vim'
 
-[[plugins]]
+[[plugins]] # 非同期シンタックスチェック
 repo = 'w0rp/ale'
+
+#[[plugins]]
+#repo = 'huawenyu/neogdb.vim'
+#hook_add = '''
+#let g:neogdb_window = ['backtrace', 'breakpoint']
+#'''
+
+[[plugins]] # GDB
+repo = 'idanarye/vim-vebugger'
+hook_add = 'source ~/.vimfiles/hook/vebugger.vim'
 
 [[plugins]] # ファイル名検索ジャンプ
 repo = 'ctrlpvim/ctrlp.vim'
@@ -64,3 +74,12 @@ hook_add = 'source ~/.vimfiles/hook/ctrlp.vim'
 [[plugins]] # カラースキーマ
 repo = 'tomasr/molokai'
 hook_add = 'set t_Co=256'
+
+[[plugins]] # カラースキーマ
+repo = 'vim-scripts/moria'
+
+[[plugins]] # カラースキーマ
+repo = 'Haron-Prime/Antares'
+
+[[plugins]] # カラースキーマ
+repo = 'freeo/vim-kalisi'

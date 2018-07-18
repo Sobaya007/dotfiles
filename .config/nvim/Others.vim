@@ -10,11 +10,10 @@ nnoremap yy "*yy
 vnoremap y "*y
 nnoremap p "*p
 vnoremap p "*p
-noremap t :vsplit<CR>:terminal<CR>
 nnoremap == gg=G
 nnoremap <C-q> :call RunTerminal()<CR>
 if has("nvim")
-tnoremap <silent> <ESC> <C-\><C-n>
+    tnoremap <silent> <ESC> <C-\><C-n>
 endif
 syntax on
 
@@ -40,24 +39,21 @@ set backup
 set list
 set listchars=tab:>.,trail:_,extends:>,precedes:<,nbsp:%
 set conceallevel=0
-set timeout timeoutlen=50
 set clipboard=unnamed,unnamedplus
 let g:vim_json_syntax_conceal=0
 let g:ctrlp_custom_ignore = 'node_modules/'
 au FileType tex setlocal nocursorline
 au FileType tex :NoMatchParen
-"autocmd BufRead,BufNewFile *.vert set filetype=c
-"autocmd BufRead,BufNewFile *.frag set filetype=c
 autocmd BufRead,BufNewFile *.js set tabstop=4 shiftwidth=4
 "autocmd BufRead,BufNewFile,BufWrite *.tex execute '!latexmk %'
+autocmd BufNewFile *.d 0r $HOME/.vimfiles/template/template.d
 
 augroup QfAutoCommands
-  autocmd!
+    autocmd!
 
-  autocmd WinEnter * if (winnr('$') == 1) && (getbufvar(winbufnr(0), '&buftype')) == 'quickfix' | quit | endif
+    autocmd WinEnter * if (winnr('$') == 1) && (getbufvar(winbufnr(0), '&buftype')) == 'quickfix' | quit | endif
 augroup END
 
-autocmd BufRead,BufNewFile * call SetQuickRunCommand()
 autocmd BufRead,BufNewFile *.vert, *.frag set ft=glsl
 
 function! s:is_number(str)
@@ -67,34 +63,34 @@ endfunction
 
 function! s:winnrlist(...)
     return a:0
-\       ? range(1, tabpagewinnr(a:1, "$"))
-\       : range(1, tabpagewinnr(tabpagenr(), "$"))
+                \       ? range(1, tabpagewinnr(a:1, "$"))
+                \       : range(1, tabpagewinnr(tabpagenr(), "$"))
 endfunction
 
 
 function! s:winlist(...)
     let tabnr = a:0 == 0 ? tabpagenr() : a:1
     return map(s:winnrlist(tabnr), '{
-\       "winnr" : v:val,
-\       "name"  : gettabwinvar(tabnr, v:val, "name")
-\   }')
+                \       "winnr" : v:val,
+                \       "name"  : gettabwinvar(tabnr, v:val, "name")
+                \   }')
 endfunction
 
 
 function! s:winnr(...)
     return a:0 == 0    ? winnr()
-\        : a:1 ==# "$" ? winnr("$")
-\        : a:1 ==# "#" ? winnr("#")
-\        : !s:is_number(a:1) ? (filter(s:winlist(), 'v:val.name ==# a:1') + [{'winnr' : '-1'}])[0].winnr
-\        : a:1
+                \        : a:1 ==# "$" ? winnr("$")
+                \        : a:1 ==# "#" ? winnr("#")
+                \        : !s:is_number(a:1) ? (filter(s:winlist(), 'v:val.name ==# a:1') + [{'winnr' : '-1'}])[0].winnr
+                \        : a:1
 endfunction
 
 function! s:winname(...)
     return a:0 == 0    ? s:winname(winnr())
-\        : a:1 ==# "$" ? s:winname(winnr("$"))
-\        : a:1 ==# "#" ? s:winname(winnr("#"))
-\        : !s:is_number(a:1) ? (filter(s:winlist(), 'v:val.name ==# a:1') + [{'name' : ''}])[0].name
-\        : (filter(s:winlist(), 'v:val.winnr ==# a:1') + [{'name' : ''}])[0].name
+                \        : a:1 ==# "$" ? s:winname(winnr("$"))
+                \        : a:1 ==# "#" ? s:winname(winnr("#"))
+                \        : !s:is_number(a:1) ? (filter(s:winlist(), 'v:val.name ==# a:1') + [{'name' : ''}])[0].name
+                \        : (filter(s:winlist(), 'v:val.winnr ==# a:1') + [{'name' : ''}])[0].name
 endfunction
 
 
@@ -111,25 +107,28 @@ endfunction
 command! -count=0 -nargs=1 VSplit call s:split("vsplit", <q-args>) | if <count> | silent execute <count> | endif
 
 function SetQuickRunCommand()
-  let l:file = expand('%')
-  if &filetype == 'c' || &filetype == 'cpp'
-      let g:quickrun_cmd = 'gcc ' . l:file . '; ./a.out'
-  elseif &filetype == 'd'
-      if !empty(dutyl#projectRoot())
-          let g:quickrun_cmd = 'dub'
-      else
-          let g:quickrun_cmd = 'rdmd ' . l:file
-      endif
-  end
+    if exists('dutyl#projectRoot') && !empty(dutyl#projectRoot())
+        let g:quickrun_cmd = 'dub'
+    else
+        let l:file = expand('%')
+        if &filetype == 'c' || &filetype == 'cpp'
+            let g:quickrun_cmd = 'gcc ' . l:file . '; ./a.out'
+        elseif &filetype == 'd'
+            let g:quickrun_cmd = 'rdmd ' . l:file
+        endif
+    endif
 endfunction
 
 function QuickRun()
-  if !exists("g:quickrun_cmd")
-    echo 'Command Not Found.'
-    return
-  endif
-  :VSplit QuickRun
-  exec ":terminal " . g:quickrun_cmd
+    if !exists("g:quickrun_cmd")
+        call SetQuickRunCommand()
+    endif
+    if !exists("g:quickrun_cmd")
+        echo 'Command Not Found.'
+        return
+    endif
+    :VSplit QuickRun
+    exec ":terminal " . g:quickrun_cmd
 endfunction
 
 nnoremap <S-r> :call QuickRun()<CR>

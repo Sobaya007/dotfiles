@@ -14,13 +14,20 @@ let g:deoplete#sources#d#dcd_server_autostart=1
 let g:deoplete#sources#d#dub_import=1
 '''
 
+[[plugins]] # D言語ハイライター
+repo = 'Sirsireesh/vim-dlang-phobos-highlighter'
+on_ft = 'd'
+hook_add = '''
+let g:d_class_scope_highlight = 1
+'''
+
 [[plugins]] # Dのやつ
 repo = 'Sobaya007/vim-dutyl'
 on_ft = 'd'
 hook_source = '''
   nnoremap <C-]> :DUjump<CR>
-  let g:dutyl_dontHandleFormat=1
-  let g:dutyl_dontHandleIndent=1
+  "let g:dutyl_dontHandleFormat=1
+  "let g:dutyl_dontHandleIndent=1
 '''
 hook_post_source = '''
   if !empty(dutyl#projectRoot())
@@ -79,7 +86,7 @@ on_ft = 'help'
 hook_add = 'set helplang=ja,en'
 
 [[plugins]] #Java Script
-repo = 'othree/yajs.vim'
+repo = 'pangloss/vim-javascript'
 on_ft = 'js'
 
 [[plugins]] # Markdownがブラウザでプレビューできる
