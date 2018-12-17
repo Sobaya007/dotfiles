@@ -24,6 +24,7 @@ set wildmenu wildmode=longest:full:full
 set nohlsearch
 set laststatus=2
 set statusline=%F%m%r%h%w\ [FORMAT=%{&ff}]\ [TYPE=%Y]\ [ASCII=\%03.3b]\ [POS=%04l,%04v]
+set inccommand=split
 set tabstop=4
 set shiftwidth=4
 set expandtab
@@ -115,6 +116,10 @@ function SetQuickRunCommand()
             let g:quickrun_cmd = 'gcc ' . l:file . '; ./a.out'
         elseif &filetype == 'd'
             let g:quickrun_cmd = 'rdmd ' . l:file
+        elseif &filetype == 'purescript'
+            let g:quickrun_cmd = 'pulp run'
+        elseif &filetype == 'tex'
+            let g:quickrun_cmd = ''
         endif
     endif
 endfunction

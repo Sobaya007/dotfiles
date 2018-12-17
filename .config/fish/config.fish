@@ -72,8 +72,18 @@ if status --is-interactive
     tmux new-session
 end 
 
-source ~/dlang/ldc-1.11.0/activate.fish
+# load LDC
+if test -e ~/dlang/ldc-1.11.0
+    source ~/dlang/ldc-1.11.0/activate.fish
+end
 
 ## CUDA and cuDNN paths
-set PATH /usr/local/cuda-8.0/bin $PATH
-set LD_LIBRARY_PATH /usr/local/cuda-8.0/lib64 $LD_LIBRARY_PATH
+if test -e /usr/local/cuda-8.0
+    set PATH /usr/local/cuda-8.0/bin $PATH
+    set LD_LIBRARY_PATH /usr/local/cuda-8.0/lib64 $LD_LIBRARY_PATH
+end
+
+# for npm
+if test -e ~/.npm-global/bin
+    set PATH ~/.npm-global/bin $PATH
+end

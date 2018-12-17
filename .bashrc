@@ -115,3 +115,7 @@ GIT_PS1_SHOWDIRTYSTATE=true
 export PS1='\n\[\e[1;36m\][\w]\n\[\e[38;5;83m\]⭠[$(__git_ps1 "%s")]\[\e[1;33m\]\n\$>\[\e[00m\]'
 
 tmux
+export http_proxy=''
+export https_proxy=''
+export ftp_proxy=''
+export socks_proxy=''
