@@ -71,3 +71,9 @@ set -x NODE_PATH (npm root -g)
 if status --is-interactive
     tmux new-session
 end 
+
+# for emcc
+set PATH /tmp/toolchains/llvm-js/bin /tmp/toolchains/emscripten $PATH
+
+# for npm
+set PATH ~/.npm-global/bin $PATH

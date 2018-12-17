@@ -63,6 +63,9 @@ repo = 'w0rp/ale'
 #let g:neogdb_window = ['backtrace', 'breakpoint']
 #'''
 
+[[plugins]] # reload
+repo = 'lordm/vim-browser-reload-linux'
+
 [[plugins]] # GDB
 repo = 'idanarye/vim-vebugger'
 hook_add = 'source ~/.vimfiles/hook/vebugger.vim'

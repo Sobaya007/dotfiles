@@ -26,14 +26,22 @@ repo = 'Sobaya007/vim-dutyl'
 on_ft = 'd'
 hook_source = '''
   nnoremap <C-]> :DUjump<CR>
-  "let g:dutyl_dontHandleFormat=1
-  "let g:dutyl_dontHandleIndent=1
+  let g:dutyl_dontHandleFormat=1
+  let g:dutyl_dontHandleIndent=1
 '''
 hook_post_source = '''
   if !empty(dutyl#projectRoot())
     let g:quickrun_cmd = 'dub'
   endif
 '''
+
+[[plugins]] # purescript
+repo = 'purescript-contrib/purescript-vim'
+on_ft='purescript'
+
+[[plugins]] # purescript
+repo = 'FrigoEU/psc-ide-vim'
+on_ft='purescript'
 
 [[plugins]] # スニペット
 repo = 'Shougo/neosnippet'
@@ -73,8 +81,11 @@ on_ft = ['markdown','mkd']
 
 [[plugins]] #LaTex
 repo = 'lervag/vimtex'
-on_ft = '.tex'
+on_ft = 'tex'
 hook_add = 'source ~/.vimfiles/hook/Vim-Latex.vim'
+hook_post_source = '''
+    :VimtexCompile
+'''
 
 [[plugins]] # Rust 
 repo = 'rust-lang/rust.vim'
@@ -88,6 +99,10 @@ hook_add = 'set helplang=ja,en'
 [[plugins]] #Java Script
 repo = 'pangloss/vim-javascript'
 on_ft = 'js'
+
+[[plugins]] #Java Script
+repo = 'mattn/emmet-vim'
+on_ft = 'html'
 
 [[plugins]] # Markdownがブラウザでプレビューできる
 repo = 'euclio/vim-markdown-composer'
