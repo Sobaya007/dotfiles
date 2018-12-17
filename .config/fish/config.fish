@@ -71,3 +71,9 @@ set -x NODE_PATH (npm root -g)
 if status --is-interactive
     tmux new-session
 end 
+
+source ~/dlang/ldc-1.11.0/activate.fish
+
+## CUDA and cuDNN paths
+set PATH /usr/local/cuda-8.0/bin $PATH
+set LD_LIBRARY_PATH /usr/local/cuda-8.0/lib64 $LD_LIBRARY_PATH

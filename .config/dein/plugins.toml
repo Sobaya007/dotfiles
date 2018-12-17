@@ -17,7 +17,10 @@ hook_add = 'source ~/.vimfiles/hook/lightline.vim'
 
 [[plugins]] # ファイルツリー
 repo = 'scrooloose/nerdtree'
-hook_add = 'nnoremap <silent><C-e> :NERDTreeToggle<CR>'
+hook_add = '''
+    nnoremap <silent><C-e> :NERDTreeToggle<CR>
+    set shell=sh
+'''
 
 [[plugins]] # ファイルツリーにGit情報をのせる
 repo = 'Xuyuanp/nerdtree-git-plugin'
