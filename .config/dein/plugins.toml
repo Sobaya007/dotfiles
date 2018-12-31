@@ -39,29 +39,44 @@ repo = 'cohama/agit.vim'
 repo = 'rking/ag.vim'
 hook_add = 'nnoremap ? :LAg '
 
-#[[plugins]] # 適当に実行
-#repo = 'thinca/vim-quickrun'
-#hook_add = 'nnoremap <S-r> :QuickRun<CR>'
-
-[[plugins]] # quickrunのhookがいっぱいある
-repo = 'osyo-manga/shabadou.vim'
-
-#[[plugins]] # quickfixのエラー箇所をハイライト
-#repo = 'jceb/vim-hier'
-
-#[[plugins]] # 非同期シンタックスチェック
-#repo = 'osyo-manga/vim-watchdogs'
-#depends = ['vimproc', 'vim-quickrun', 'shabadou.vim', 'vim-hier']
-#hook_add = 'source ~/.vimfiles/hook/Watchdogs.vim'
-
 [[plugins]] # 非同期シンタックスチェック
 repo = 'w0rp/ale'
+if = 0
 
-#[[plugins]]
-#repo = 'huawenyu/neogdb.vim'
-#hook_add = '''
-#let g:neogdb_window = ['backtrace', 'breakpoint']
-#'''
+[[plugins]] # vim-lsp用のやつ
+repo = 'prabirshrestha/async.vim'
+
+[[plugins]] # language server protocol
+repo = 'prabirshrestha/vim-lsp'
+hook_add = '''
+let g:dls_path = '~/.dub/packages/.bin/dls-latest/dls'
+if executable(expand(g:dls_path))
+    au User lsp_setup call lsp#register_server({
+        \ 'name': 'dls',
+        \ 'cmd': {server_info->[expand(g:dls_path), '--stdio']},
+        \ 'whitelist': ['d'],
+        \ })
+endif
+
+let g:lsp_signs_enabled = 1
+
+if &filetype == 'd'
+    vnoremap = :LspDocumentRangeFormat<CR>
+endif
+'''
+
+[[plugins]] # auto completion
+repo = 'prabirshrestha/asyncomplete.vim'
+hook_add = '''
+let g:asyncomplete_smart_completion = 1
+let g:asyncomplete_auto_popup = 1
+inoremap <expr> <Tab> pumvisible() ? "\<C-n>" : "\<Tab>"
+inoremap <expr> <S-Tab> pumvisible() ? "\<C-p>" : "\<S-Tab>"
+inoremap <expr> <cr> pumvisible() ? "\<C-y>" : "\<cr>"
+'''
+
+[[plugins]] # auto completion
+repo = 'prabirshrestha/asyncomplete-lsp.vim'
 
 [[plugins]] # reload
 repo = 'lordm/vim-browser-reload-linux'

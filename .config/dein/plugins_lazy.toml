@@ -3,6 +3,7 @@ repo = 'Shougo/deoplete.nvim'
 on_event = 'InsertCharPre'
 hook_add = 'source ~/.vimfiles/hook/deoplete.vim'
 on_event = 'InsertEnter'
+if = 0
 
 [[plugins]] # D言語拡張
 repo = 'Sobaya007/deoplete-d'
@@ -13,6 +14,7 @@ hook_add = '''
 let g:deoplete#sources#d#dcd_server_autostart=1
 let g:deoplete#sources#d#dub_import=1
 '''
+if = 0
 
 [[plugins]] # D言語ハイライター
 repo = 'Sirsireesh/vim-dlang-phobos-highlighter'
@@ -83,9 +85,6 @@ on_ft = ['markdown','mkd']
 repo = 'lervag/vimtex'
 on_ft = 'tex'
 hook_add = 'source ~/.vimfiles/hook/Vim-Latex.vim'
-hook_post_source = '''
-    :VimtexCompile
-'''
 
 [[plugins]] # Rust 
 repo = 'rust-lang/rust.vim'
