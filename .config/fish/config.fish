@@ -38,7 +38,7 @@ alias ga='git add'
 alias gb='git branch'
 alias gc='git checkout'
 alias gd='git diff'
-alias gg='git log --graph --all'
+alias gg='git log --graph --all --decorate'
 alias gm='git merge'
 alias gs='git status'
 alias gu='git submodule update'
@@ -72,8 +72,25 @@ if status --is-interactive
     tmux new-session
 end 
 
-# for emcc
-set PATH /tmp/toolchains/llvm-js/bin /tmp/toolchains/emscripten $PATH
+# load LDC
+if test -e ~/dlang/ldc-1.13.0
+    source ~/dlang/ldc-1.13.0/activate.fish
+    functions -e fish_prompt
+    functions -c _old_d_fish_prompt fish_prompt
+    functions -e _old_d_fish_prompt
+end
+
+## CUDA and cuDNN paths
+if test -e /usr/local/cuda-8.0
+    set PATH /usr/local/cuda-8.0/bin $PATH
+    set LD_LIBRARY_PATH /usr/local/cuda-8.0/lib64 $LD_LIBRARY_PATH
+end
 
 # for npm
-set PATH ~/.npm-global/bin $PATH
+if test -e ~/.npm-global/bin
+    set PATH ~/.npm-global/bin $PATH
+end
+
+# for WSL
+umask 022
+set -x DISPLAY :0.0
