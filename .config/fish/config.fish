@@ -38,7 +38,7 @@ alias ga='git add'
 alias gb='git branch'
 alias gc='git checkout'
 alias gd='git diff'
-alias gg='git log --graph --all'
+alias gg='git log --graph --all --decorate'
 alias gm='git merge'
 alias gs='git status'
 alias gu='git submodule update'
@@ -73,8 +73,11 @@ if status --is-interactive
 end 
 
 # load LDC
-if test -e ~/dlang/ldc-1.11.0
-    source ~/dlang/ldc-1.11.0/activate.fish
+if test -e ~/dlang/ldc-1.13.0
+    source ~/dlang/ldc-1.13.0/activate.fish
+    functions -e fish_prompt
+    functions -c _old_d_fish_prompt fish_prompt
+    functions -e _old_d_fish_prompt
 end
 
 ## CUDA and cuDNN paths
@@ -87,3 +90,7 @@ end
 if test -e ~/.npm-global/bin
     set PATH ~/.npm-global/bin $PATH
 end
+
+# for WSL
+umask 022
+set -x DISPLAY :0.0
