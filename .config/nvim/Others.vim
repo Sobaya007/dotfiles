@@ -120,6 +120,10 @@ function SetQuickRunCommand()
             let g:quickrun_cmd = 'pulp run'
         elseif &filetype == 'tex'
             let g:quickrun_cmd = ''
+        elseif &filetype == 'python'
+            let g:quickrun_cmd = 'python ' . l:file
+        elseif &filetype == 'scala'
+            let g:quickrun_cmd = 'sbt run'
         endif
     endif
 endfunction

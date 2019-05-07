@@ -62,6 +62,8 @@ if executable(expand(g:dls_path))
 endif
 
 let g:lsp_signs_enabled = 1
+let g:lsp_diagnostics_echo_cursor = 1
+let g:lsp_signs_error = {'text': '✗'}
 
 if &filetype == 'd'
     vnoremap = :LspDocumentRangeFormat<CR>

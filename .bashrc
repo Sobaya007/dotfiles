@@ -119,3 +119,14 @@ export http_proxy=''
 export https_proxy=''
 export ftp_proxy=''
 export socks_proxy=''
+
+
+# This loads DVM into a shell session.
+if [ -s /home/sobaya/.dvm/scripts/dvm ] ; then
+	. /home/sobaya/.dvm/scripts/dvm
+fi
+
+# This loads DVM into a shell session.
+if [ -s /home/sobaya/.dvm/scripts/dvm ] ; then
+	. /home/sobaya/.dvm/scripts/dvm
+fi

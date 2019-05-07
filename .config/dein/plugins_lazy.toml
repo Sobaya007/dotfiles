@@ -37,6 +37,10 @@ hook_post_source = '''
   endif
 '''
 
+[[plugins]] # scala
+repo = 'derekwyatt/vim-scala'
+on_ft='scala'
+
 [[plugins]] # purescript
 repo = 'purescript-contrib/purescript-vim'
 on_ft='purescript'
@@ -83,7 +87,7 @@ on_ft = ['markdown','mkd']
 
 [[plugins]] #LaTex
 repo = 'lervag/vimtex'
-on_ft = 'tex'
+on_ft = ['tex', 'plaintex']
 hook_add = 'source ~/.vimfiles/hook/Vim-Latex.vim'
 
 [[plugins]] # Rust 
@@ -100,8 +104,13 @@ repo = 'pangloss/vim-javascript'
 on_ft = 'js'
 
 [[plugins]] #Java Script
+repo = 'othree/yajs.vim'
+on_ft = 'js'
+
+[[plugins]] #HTML
 repo = 'mattn/emmet-vim'
 on_ft = 'html'
+
 
 [[plugins]] # Markdownがブラウザでプレビューできる
 repo = 'euclio/vim-markdown-composer'
