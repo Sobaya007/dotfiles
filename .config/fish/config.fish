@@ -38,7 +38,7 @@ alias ga='git add'
 alias gb='git branch'
 alias gc='git checkout'
 alias gd='git diff'
-alias gg='git log --graph --all'
+alias gg='git log --graph --all --decorate'
 alias gm='git merge'
 alias gs='git status'
 alias gu='git submodule update'
@@ -87,3 +87,5 @@ end
 if test -e ~/.npm-global/bin
     set PATH ~/.npm-global/bin $PATH
 end
+
+set PATH /snap/bin $PATH
