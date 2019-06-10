@@ -3,6 +3,7 @@ repo = 'Shougo/deoplete.nvim'
 on_event = 'InsertCharPre'
 hook_add = 'source ~/.vimfiles/hook/deoplete.vim'
 on_event = 'InsertEnter'
+if = 0
 
 [[plugins]] # D言語拡張
 repo = 'Sobaya007/deoplete-d'
@@ -13,6 +14,7 @@ hook_add = '''
 let g:deoplete#sources#d#dcd_server_autostart=1
 let g:deoplete#sources#d#dub_import=1
 '''
+if = 0
 
 [[plugins]] # D言語ハイライター
 repo = 'Sirsireesh/vim-dlang-phobos-highlighter'
@@ -34,6 +36,10 @@ hook_post_source = '''
     let g:quickrun_cmd = 'dub'
   endif
 '''
+
+[[plugins]] # scala
+repo = 'derekwyatt/vim-scala'
+on_ft='scala'
 
 [[plugins]] # purescript
 repo = 'purescript-contrib/purescript-vim'
@@ -81,11 +87,8 @@ on_ft = ['markdown','mkd']
 
 [[plugins]] #LaTex
 repo = 'lervag/vimtex'
-on_ft = 'tex'
+on_ft = ['tex', 'plaintex']
 hook_add = 'source ~/.vimfiles/hook/Vim-Latex.vim'
-hook_post_source = '''
-    :VimtexCompile
-'''
 
 [[plugins]] # Rust 
 repo = 'rust-lang/rust.vim'
@@ -101,8 +104,13 @@ repo = 'pangloss/vim-javascript'
 on_ft = 'js'
 
 [[plugins]] #Java Script
+repo = 'othree/yajs.vim'
+on_ft = 'js'
+
+[[plugins]] #HTML
 repo = 'mattn/emmet-vim'
 on_ft = 'html'
+
 
 [[plugins]] # Markdownがブラウザでプレビューできる
 repo = 'euclio/vim-markdown-composer'

@@ -72,9 +72,20 @@ if status --is-interactive
     tmux new-session
 end 
 
+## load DMD
+#if test -e ~/dlang/dmd-2.085.0
+#    source ~/dlang/dmd-2.085.0/activate.fish
+#    functions -e fish_prompt
+#    functions -c _old_d_fish_prompt fish_prompt
+#    functions -e _old_d_fish_prompt
+#end
+
 # load LDC
-if test -e ~/dlang/ldc-1.11.0
-    source ~/dlang/ldc-1.11.0/activate.fish
+if test -e ~/dlang/ldc-1.13.0
+    source ~/dlang/ldc-1.13.0/activate.fish
+    functions -e fish_prompt
+    functions -c _old_d_fish_prompt fish_prompt
+    functions -e _old_d_fish_prompt
 end
 
 ## CUDA and cuDNN paths
@@ -89,3 +100,7 @@ if test -e ~/.npm-global/bin
 end
 
 set PATH /snap/bin $PATH
+
+# for WSL
+umask 022
+set -x DISPLAY :0.0
