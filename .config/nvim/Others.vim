@@ -45,9 +45,11 @@ let g:vim_json_syntax_conceal=0
 let g:ctrlp_custom_ignore = 'node_modules/'
 au FileType tex setlocal nocursorline
 au FileType tex :NoMatchParen
-autocmd BufRead,BufNewFile *.js set tabstop=4 shiftwidth=4
+autocmd BufRead,BufNewFile *.js set tabstop=2 shiftwidth=2
 "autocmd BufRead,BufNewFile,BufWrite *.tex execute '!latexmk %'
 autocmd BufNewFile *.d 0r $HOME/.vimfiles/template/template.d
+autocmd BufRead *.md call s:MarkdownAction()
+autocmd BufRead, *.vue set tabstop=2 shiftwidth=2
 
 augroup QfAutoCommands
     autocmd!
@@ -107,24 +109,39 @@ endfunction
 
 command! -count=0 -nargs=1 VSplit call s:split("vsplit", <q-args>) | if <count> | silent execute <count> | endif
 
+function s:MarkdownAction()
+    try
+        :call jobstart(['hugo', 'server'])
+    catch
+        :ComposerStart
+        :ComposerOpen
+    endtry
+endfunction
+
 function SetQuickRunCommand()
-    if exists('dutyl#projectRoot') && !empty(dutyl#projectRoot())
-        let g:quickrun_cmd = 'dub'
-    else
-        let l:file = expand('%')
-        if &filetype == 'c' || &filetype == 'cpp'
-            let g:quickrun_cmd = 'gcc ' . l:file . '; ./a.out'
-        elseif &filetype == 'd'
+    let l:file = expand('%')
+    if &filetype == 'c' || &filetype == 'cpp'
+        let g:quickrun_cmd = 'gcc ' . l:file . '; ./a.out'
+    elseif &filetype == 'd'
+        try
+            :silent !dub describe
+        catch
+        endtry
+        if v:shell_error == '0'
+            let g:quickrun_cmd = 'dub'
+        else
             let g:quickrun_cmd = 'rdmd ' . l:file
-        elseif &filetype == 'purescript'
-            let g:quickrun_cmd = 'pulp run'
-        elseif &filetype == 'tex'
-            let g:quickrun_cmd = ''
-        elseif &filetype == 'python'
-            let g:quickrun_cmd = 'python ' . l:file
-        elseif &filetype == 'scala'
-            let g:quickrun_cmd = 'sbt run'
         endif
+    elseif &filetype == 'purescript'
+        let g:quickrun_cmd = 'pulp run'
+    elseif &filetype == 'tex'
+        let g:quickrun_cmd = ''
+    elseif &filetype == 'python'
+        let g:quickrun_cmd = 'python ' . l:file
+    elseif &filetype == 'scala'
+        let g:quickrun_cmd = 'sbt run'
+    elseif &filetype == 'sh'
+        let g:quickrun_cmd = 'sh ' . l:file
     endif
 endfunction
 

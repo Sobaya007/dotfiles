@@ -42,46 +42,29 @@ repo = 'cohama/agit.vim'
 repo = 'rking/ag.vim'
 hook_add = 'nnoremap ? :LAg '
 
-[[plugins]] # 非同期シンタックスチェック
-repo = 'w0rp/ale'
-if = 0
-
-[[plugins]] # vim-lsp用のやつ
-repo = 'prabirshrestha/async.vim'
-
-[[plugins]] # language server protocol
-repo = 'prabirshrestha/vim-lsp'
+[[plugins]] #LSP
+repo = 'autozimu/LanguageClient-neovim'
+rev = 'next'
+build = 'bash install.sh'
 hook_add = '''
-let g:dls_path = '~/.dub/packages/.bin/dls-latest/dls'
-if executable(expand(g:dls_path))
-    au User lsp_setup call lsp#register_server({
-        \ 'name': 'dls',
-        \ 'cmd': {server_info->[expand(g:dls_path), '--stdio']},
-        \ 'whitelist': ['d'],
-        \ })
-endif
-
-let g:lsp_signs_enabled = 1
-let g:lsp_diagnostics_echo_cursor = 1
-let g:lsp_signs_error = {'text': '✗'}
-
-if &filetype == 'd'
-    vnoremap = :LspDocumentRangeFormat<CR>
-endif
+let g:LanguageClient_serverCommands = {
+    \ 'rust': ['rustup', 'run', 'stable', 'rls'],
+    \ 'javascript': ['typescript-language-server', '--stdio'],
+    \ 'd': ['~/git/dls/dls', '--init.logFile=/home/sobaya/log.txt']
+    \ }
+let g:LanguageClient_rootMarkers = {
+    \ 'javascript': ['project.json'],
+    \ 'rust': ['Cargo.toml'],
+    \ 'd': ['dub.json', 'dub.sdl'],
+    \ }
+nnoremap <C-L> :call LanguageClient_contextMenu()<CR>
+nnoremap <silent> K :call LanguageClient#textDocument_hover()<CR>
+nnoremap <silent> <C-]> :call LanguageClient#textDocument_definition()<CR>
+nnoremap <silent> <F2> :call LanguageClient#textDocument_rename()<CR>
 '''
 
-[[plugins]] # auto completion
-repo = 'prabirshrestha/asyncomplete.vim'
-hook_add = '''
-let g:asyncomplete_smart_completion = 1
-let g:asyncomplete_auto_popup = 1
-inoremap <expr> <Tab> pumvisible() ? "\<C-n>" : "\<Tab>"
-inoremap <expr> <S-Tab> pumvisible() ? "\<C-p>" : "\<S-Tab>"
-inoremap <expr> <cr> pumvisible() ? "\<C-y>" : "\<cr>"
-'''
-
-[[plugins]] # auto completion
-repo = 'prabirshrestha/asyncomplete-lsp.vim'
+[[plugins]] # html
+repo = 'mattn/emmet-vim'
 
 [[plugins]] # reload
 repo = 'lordm/vim-browser-reload-linux'
