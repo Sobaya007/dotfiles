@@ -99,6 +99,8 @@ if test -e ~/.npm-global/bin
     set PATH ~/.npm-global/bin $PATH
 end
 
+set PATH /snap/bin $PATH
+
 # for WSL
 umask 022
 set -x DISPLAY :0.0
