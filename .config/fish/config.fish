@@ -72,13 +72,13 @@ if status --is-interactive
     tmux new-session
 end 
 
-## load DMD
-#if test -e ~/dlang/dmd-2.085.0
-#    source ~/dlang/dmd-2.085.0/activate.fish
-#    functions -e fish_prompt
-#    functions -c _old_d_fish_prompt fish_prompt
-#    functions -e _old_d_fish_prompt
-#end
+# load DMD
+if test -e ~/dlang/dmd-2.087.0
+    source ~/dlang/dmd-2.087.0/activate.fish
+    functions -e fish_prompt
+    functions -c _old_d_fish_prompt fish_prompt
+    functions -e _old_d_fish_prompt
+end
 
 # load LDC
 if test -e ~/dlang/ldc-1.13.0
