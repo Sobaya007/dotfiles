@@ -1,0 +1,17 @@
+{
+    "languageserver": {
+        "d": {
+            "command": "~/.dub/packages/.bin/dls-latest/dls",
+            "args": [],
+            "filetypes": ["d"],
+            "initializationOptions": {},
+            "rootPatterns": ["dub.json", "dub.sdl"],
+            "settings": {
+                "d": {
+                    "validation": {},
+                    "completion": {}
+                }
+            }
+        }
+    }
+}

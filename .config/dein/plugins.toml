@@ -48,19 +48,23 @@ rev = 'next'
 build = 'bash install.sh'
 hook_add = '''
 let g:LanguageClient_serverCommands = {
+    \ 'c': ['clangd', '-compile-commands-dir=' . getcwd() . '/build'],
+    \ 'cpp': ['clangd', '-compile-commands-dir=' . getcwd() . '/build'],
     \ 'rust': ['rustup', 'run', 'stable', 'rls'],
     \ 'javascript': ['typescript-language-server', '--stdio'],
-    \ 'd': ['~/git/dls/dls', '--init.logFile=/home/sobaya/log.txt']
+    \ 'd': ['~/.dub/packages/.bin/dls-latest/dls']
     \ }
 let g:LanguageClient_rootMarkers = {
     \ 'javascript': ['project.json'],
     \ 'rust': ['Cargo.toml'],
     \ 'd': ['dub.json', 'dub.sdl'],
     \ }
-nnoremap <C-L> :call LanguageClient_contextMenu()<CR>
+
+nnoremap <F5> :call LanguageClient_contextMenu()<CR>
 nnoremap <silent> K :call LanguageClient#textDocument_hover()<CR>
 nnoremap <silent> <C-]> :call LanguageClient#textDocument_definition()<CR>
 nnoremap <silent> <F2> :call LanguageClient#textDocument_rename()<CR>
+set hidden "ないと失敗する操作が存在する(Renameとか)
 '''
 
 [[plugins]] # html

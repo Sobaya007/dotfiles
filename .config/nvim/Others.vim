@@ -4,12 +4,6 @@ noremap <C-h> <C-w>h
 noremap <C-j> <C-w>j
 noremap <C-k> <C-w>k
 noremap <C-l> <C-w>l
-nnoremap dd "*dd
-vnoremap d "*d
-nnoremap yy "*yy
-vnoremap y "*y
-nnoremap p "*p
-vnoremap p "*p
 nnoremap == gg=G
 nnoremap <C-q> :call RunTerminal()<CR>
 if has("nvim")
@@ -50,6 +44,7 @@ autocmd BufRead,BufNewFile *.js set tabstop=2 shiftwidth=2
 autocmd BufNewFile *.d 0r $HOME/.vimfiles/template/template.d
 autocmd BufRead *.md call s:MarkdownAction()
 autocmd BufRead, *.vue set tabstop=2 shiftwidth=2
+autocmd FileType json syntax match Comment +\/\/.\+$+
 
 augroup QfAutoCommands
     autocmd!
