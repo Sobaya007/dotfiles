@@ -1,25 +1,44 @@
+# remove previous .vimfiles directory
+if test -d ~/.vimfiles
+    rm -rf ~/.vimfiles
+end
+
 # Symbolic link
-sudo rm -rf ~/.vimfiles
+function linkDotFiles
+    if not test -L ~/$argv
+        rm -rf ~/$argv
+    	ln -sf ~/dotfiles/$argv ~/$argv
+    end
+end
 
-ln -sf ~/dotfiles/.vimfiles ~/.vimfiles
-ln -sf ~/dotfiles/.tmux.conf ~/.tmux.conf
+linkDotFiles .vimfiles
+linkDotFiles .tmux.conf
+linkDotFiles .config/dein
+linkDotFiles .config/fish
+linkDotFiles .config/nvim
 
-rm -rf ~/.config/dein
-ln -sf ~/dotfiles/.config/dein ~/.config/dein
+functions --erase linkDotFiles
 
-rm -rf ~/.config/fish
-ln -sf ~/dotfiles/.config/fish ~/.config/fish
+# setup directories
+function setup
+    if not test -e ~/.vimfiles/$argv
+        mkdir ~/.vimfiles/$argv
+    end
+end
+setup backup
+setup undo
+setup git
 
-rm -rf ~/.config/nvim
-ln -sf ~/dotfiles/.config/nvim ~/.config/nvim
-
-# Necessary Directory
-mkdir ~/.vimfiles/backup
-mkdir ~/.vimfiles/undo
-mkdir ~/git
+functions --erase setup
 
 # install js/ts language server
-git clone git@github.com:sourcegraph/javascript-typescript-langserver.git ~/git/javascript-typescript-langserver; and cd ~/git/javascript-typescript-langserver; and npm install; and npm run build;
+
+if not type -q typescript-language-server
+    sudo npm i typescript-language-server -g
+end
 
 # install d language server
-dub fetch dls
+if not test -e ~/.dub/packages/.bin/dls-latest/dls 
+    dub fetch dls
+    and dub run dls:bootstrap
+end
