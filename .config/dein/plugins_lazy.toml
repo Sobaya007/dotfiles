@@ -55,11 +55,6 @@ on_ft = 'html'
 repo  = 'cespare/vim-toml'
 on_ft = 'toml'
 
-[[plugins]] # Markdown
-repo = 'plasticboy/vim-markdown'
-on_ft = ['markdown','mkd']
-hook_add = 'let g:vim_markdown_folding_disabled = 1'
-
 [[plugins]] #LaTex
 repo = 'lervag/vimtex'
 on_ft = ['tex', 'plaintex']
@@ -94,18 +89,20 @@ on_ft = 'html'
 repo = 'dag/vim-fish'
 on_ft = 'fish'
 
-[[plugins]] # Markdownがブラウザでプレビューできる
-repo = 'euclio/vim-markdown-composer'
+[[plugins]]
+repo = 'tpope/vim-markdown'
+on_ft = 'markdown'
+
+[[plugins]]
+repo = 'kannokanno/previm'
 on_ft = 'markdown'
 hook_add = '''
-let g:markdown_composer_open_browser=0
-let g:markdown_composer_autostart=0
+   nnoremap <silent> <C-p> :PrevimOpen<CR> " Ctrl-pでプレビュー
+   " 自動で折りたたまないようにする
+   let g:vim_markdown_folding_disabled=1
+   let g:previm_enable_realtime = 1
 '''
-hook_post_update = '''
-  if has('nvim')
-    let cmd = 'cargo build --release'
-  else
-    let cmd = 'cargo build --release --no-default-features --features json-rpc'
-  endif
-  let g:dein#plugin.build = cmd
-'''
+
+[[plugins]]
+repo = 'tyru/open-browser.vim''
+on_ft = 'markdown'

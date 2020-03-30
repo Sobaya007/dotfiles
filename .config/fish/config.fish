@@ -74,20 +74,20 @@ if status --is-interactive
 end 
 
 # load DMD
-if test -e ~/dlang/dmd-2.089.0
-    source ~/dlang/dmd-2.089.0/activate.fish
+if test -e ~/dlang/dmd-2.090.0
+    source ~/dlang/dmd-2.090.0/activate.fish
     functions -e fish_prompt
     functions -c _old_d_fish_prompt fish_prompt
     functions -e _old_d_fish_prompt
 end
-
+#
 # load LDC
-#if test -e ~/dlang/ldc-1.15.0
-#    source ~/dlang/ldc-1.15.0/activate.fish
-#    functions -e fish_prompt
-#    functions -c _old_d_fish_prompt fish_prompt
-#    functions -e _old_d_fish_prompt
-#end
+if test -e ~/dlang/ldc-1.19.0
+    source ~/dlang/ldc-1.19.0/activate.fish
+    functions -e fish_prompt
+    functions -c _old_d_fish_prompt fish_prompt
+    functions -e _old_d_fish_prompt
+end
 
 ## CUDA and cuDNN paths
 if test -e /usr/local/cuda-8.0
@@ -104,4 +104,3 @@ set PATH /snap/bin $PATH
 
 # for WSL
 umask 022
-set -x DISPLAY :0.0

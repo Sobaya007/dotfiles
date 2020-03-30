@@ -48,6 +48,4 @@ set runtimepath^=~/.vimfiles
 filetype plugin indent on
 
 source ~/.config/nvim/Others.vim
-
-colorscheme antares
 " }}}

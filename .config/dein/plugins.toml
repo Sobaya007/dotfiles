@@ -90,6 +90,7 @@ repo = 'vim-scripts/moria'
 
 [[plugins]] # カラースキーマ
 repo = 'Haron-Prime/Antares'
+hook_add = 'colorscheme antares'
 
 [[plugins]] # カラースキーマ
 repo = 'freeo/vim-kalisi'
